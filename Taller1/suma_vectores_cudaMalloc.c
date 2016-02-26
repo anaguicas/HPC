@@ -52,7 +52,7 @@ int main(){
 	int blockThread=ceil(tama/blockSize);
 	sumar<<<blockThread,blockSize>>>(d_a,d_b,d_c);
 
-	cudaMemcpy(c,d_c,sizeof(d_c),cudaMemcpyDeviceToHost);
+	cudaMemcpy(c,d_c,(N* sizeof(int)), cudaMemcpyDeviceToHost);
 
  	end_t= clock();
 	total_t= ((double)(end_t - start_t))/CLOCKS_PER_SEC;
