@@ -1,5 +1,6 @@
 ###HPC
 #Taller 1
+####Suma Vetores
 
 En este taller se ejecuto la suma de dos vectores, primero se ejecuto de manera secuencial y despues se ejecuto de manera paralela
 usando cudaMalloc y cudaMemcpy. 
