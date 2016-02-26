@@ -3,7 +3,7 @@
 #include<stdio.h>
 #include<malloc.h>
 #include <unistd.h> 
-
+#include<math.h>
 
 #define N 5
 
@@ -47,7 +47,10 @@ int main(){
 	cudaMemcpy(d_a,a,sizeof(a),cudaMemcpyHostToDevice);
 	cudaMemcpy(d_b,b,sizeof(b),cudaMemcpyHostToDevice);
 
-	sumar<<<1,10>>>(d_a,d_b,d_c);
+	int tama=N;
+	int blockSize=32;
+	int blockThread=ceil(tama/blockSize);
+	sumar<<<blockThread,blockSize>>>(d_a,d_b,d_c);
 
 	cudaMemcpy(c,d_c,sizeof(d_c),cudaMemcpyDeviceToHost);
 
