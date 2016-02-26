@@ -64,7 +64,7 @@ int main(){
 	total_t= ((double)(end_t - start_t))/CLOCKS_PER_SEC;
 	printf("tiempo %f",total_t);
 
-	imprimir(c);
+	//imprimir(c);
 	
 	
 	free(a);
