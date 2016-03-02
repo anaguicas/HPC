@@ -12,15 +12,16 @@
 
 __global__ void multiplicar(int *m1_a, int *m2_a, int *m3_a){
 	
-	int i,j;
+	int i,j,aux;
 
 	j=(threadIdx.x*blockDim.x) + threadIdx.x;
 	i=(threadIdx.y*blockDim.y) + threadIdx.y;
 	
 	if(i<cols && j<rows){
 		for(int k=0;k<cols;k++){
-		m3_a[i*cols+j] += m1_a[i*cols+j] * m2_a[j*cols+j];
+		 aux+= m1_a[i*cols+j] * m2_a[j*cols+j];
 		}
+		m3_a[i*cols+j]=aux;
 	}
 }
 
@@ -29,7 +30,7 @@ void llenar(int *m){
 	int i,j;
 	for (i = 0; i < rows; i++){
 	   for (j = 0; j < cols; j++){
-		m[i*cols+j]=i*cols+j;		
+		m[i*cols+j]=i+j;		
 		}
 	}
 }
@@ -53,19 +54,19 @@ int main(){
 	clock_t start_t,end_t;
 	double total_t;
 
-	m1= (int *)malloc(rows*cols*sizeof(int *));		
-	m2= (int *)malloc(rows*cols*sizeof(int *));
-	m3= (int *)malloc(rows*cols*sizeof(int *));
+	m1= (int *)malloc(tama);		
+	m2= (int *)malloc(tama);
+	m3= (int *)malloc(tama);
 
 	llenar(m1);
 	llenar(m2);
 	
-	cudaMalloc((void **)&m1_a,(rows*cols*sizeof(int)));
-	cudaMalloc((void **)&m2_a,(rows*cols*sizeof(int)));
-	cudaMalloc((void **)&m3_a,(rows*cols*sizeof(int)));
+	cudaMalloc((void **)&m1_a,(tama));
+	cudaMalloc((void **)&m2_a,(tama));
+	cudaMalloc((void **)&m3_a,(tama));
 
-	cudaMemcpy(m1_a,m1,sizeof(int),cudaMemcpyHostToDevice);
-	cudaMemcpy(m2_a,m2,sizeof(int),cudaMemcpyHostToDevice);
+	cudaMemcpy(m1_a,m1,tama,cudaMemcpyHostToDevice);
+	cudaMemcpy(m2_a,m2,tama,cudaMemcpyHostToDevice);
 
 	int blockSize=32;
 	dim3 dimBlock(blockSize,blockSize,1);
@@ -85,6 +86,8 @@ int main(){
 	printf("\n");
 	total_t= ((double)(end_t - start_t))/CLOCKS_PER_SEC;
 	printf("tiempo %f",total_t);
+	
+	
 	
 	cudaFree(m1_a);
 	cudaFree(m2_a);
