@@ -3,72 +3,68 @@
 #include <time.h>
 #include <malloc.h>
 
-#define filas 3
+#define rows 3
 #define cols 3
+//#define tam = rows*cols*sizeof(int)
 
-void llenar(int **m){
+void llenar(int *m){
 	
 	int i,j;
-	for (i = 0; i < filas; i++){
+	for (i = 0; i < rows; i++){
 	   for (j = 0; j < cols; j++){
-		m[i][j] = (i*10)+j;
-	   }		
+				m[i*cols+j]=i*cols+j;		
+		}
 	}
 }
 
-void imprimir(int **m){
+void imprimir(int *m){
 	int i,j;
-	for (i = 0; i < filas; i++){		
+	for (i = 0; i < rows; i++){		
 		for (j = 0; j < cols; j++){
-			printf("%d ",m[i][j]);
+			printf("%d ",m[i*cols+j]);
 		}
 		printf("\n");		
 	}
 }
 
-void multiplicar(int **m1, int **m2, int **m3){
+void multiplicar(int *m1, int *m2, int *m3){
 	int i,j,k,aux;
-	for (i = 0; i < filas; i++){
+	for (i = 0; i < rows; i++){
 	     for (k = 0; k < cols; k++){
-		aux=0;
-		for (j = 0; j < filas; j++){
-		    aux += m1[i][j] * m2[j][k];
-		    m3[i][k] = aux; 
-			}
+				aux=0;
+					for (j = 0; j < rows; j++){
+		    		aux += m1[i*cols+j] * m2[j*cols+j];
+		   			 m3[i*cols+j] = aux; 
+					}
+				}
 		}
-	}
 }
 
 int main(){
 	
-	clock_t start_t, end_t;
+	int *m1,*m2,*m3;
+  
+  clock_t start_t, end_t;
 	double total_t;
 	
 	start_t = clock();
-	
-	int **m1;
-	m1= (int **)malloc(filas*sizeof(int *));	
-	
-	int i;
-	for (i = 0; i < filas; i++){
-	     m1[i] = (int *)malloc(cols*sizeof(int));
-	}
-	
-	int **m2= (int **)malloc(filas*sizeof(int *));
-	for (i = 0; i < filas; i++){
-	     m2[i] = (int *)malloc(cols*sizeof(int));
-	}
-	
-	int **m3= (int **)malloc(filas*sizeof(int *));
-	for (i = 0; i < filas; i++){
-	     m3[i] = (int *)malloc(cols*sizeof(int));
-	}
+
+	m1= (int *)malloc(rows*cols*sizeof(int *));		
+	m2= (int *)malloc(rows*cols*sizeof(int *));
+	m3= (int *)malloc(rows*cols*sizeof(int *));
 	
 	llenar(m1);
 	llenar(m2);
 	
 	multiplicar(m1,m2,m3);
+  
+  //printf("matriz 1\n");
+  //imprimir(m1);
 
+  //printf("matriz 2\n");
+  //imprimir(m2);
+  
+  //printf("resultado\n");
 	imprimir(m3);
 	
 	end_t= clock();
