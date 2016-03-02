@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
+#include <malloc.h>
 
 #define filas 3
 #define cols 3
@@ -75,6 +76,10 @@ int main(){
 	total_t= ((double)(end_t - start_t)) / CLOCKS_PER_SEC;
 	
 	printf("tiempo= %f", total_t);
+	
+	free(m1);
+	free(m2);
+	free(m3);
 	
 	return 0;
 	
