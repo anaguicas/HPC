@@ -1,5 +1,6 @@
-#include "stdio.h"
-#include "stdlib.h"
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
 
 #define filas 3
 #define cols 3
@@ -17,7 +18,7 @@ void llenar(int **m){
 void imprimir(int **m){
 	int i,j;
 	for (i = 0; i < filas; i++){		
-		for (j = 0; j < cols; j++)
+		for (j = 0; j < cols; j++){
 			printf("%d ",m[i][j]);
 		}
 		printf("\n");		
@@ -38,6 +39,12 @@ void multiplicar(int **m1, int **m2, int **m3){
 }
 
 int main(){
+	
+	clock_t start_t, end_t;
+	double total_t;
+	
+	start_t = clock();
+	
 	int **m1;
 	m1= (int **)malloc(filas*sizeof(int *));	
 	
@@ -60,9 +67,14 @@ int main(){
 	llenar(m2);
 	
 	multiplicar(m1,m2,m3);
-	
-	//imprimir(m2);
+
 	imprimir(m3);
+	
+	end_t= clock();
+	
+	total_t= ((double)(end_t - start_t)) / CLOCKS_PER_SEC;
+	
+	printf("tiempo= %f", total_t);
 	
 	return 0;
 	
