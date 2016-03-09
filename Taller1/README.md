@@ -74,6 +74,6 @@ tamaño = 200.000.000|     Ts     |Tp         |x= Ts / Tp
             | | |1,978315737
  
 [Gráfica ](https://drive.google.com/file/d/0B9HRYqVculBbdlVUbThyS21VUE0/view?usp=sharing)
-
+![alt tag](grafica.png)
  
 [Enlace para ver toma de datos y gráficas](https://docs.google.com/spreadsheets/d/1n-hjtcWSAYgRCqzw0lMCroT37GhxgKNCfioGPcaBwhQ/edit?usp=sharing)
