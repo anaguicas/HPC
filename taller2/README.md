@@ -7,7 +7,7 @@ En este taller se escribió un codigo para la multiplicación de matrices de man
 
 **Algoritmo secuencial Vs Algoritmo paralelo (ingenuo)**
 
-![alt tag]()
+![alt tag](Ts Vs Tp ingenuo.png)
 
 
 Tamaño = 100 | Ts | Tp | X = Ts/Tp
