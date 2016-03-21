@@ -31,12 +31,12 @@ void multiplicar(int *m1, int *m2, int *m3){
 	int i,j,k,aux;
 	for (i = 0; i < rows; i++){
 	     for (k = 0; k < cols; k++){
-				aux=0;
-					for (j = 0; j < rows; j++){
-		    		aux += m1[i*cols+j] * m2[j*cols+j];
-		   			 m3[i*cols+j] = aux; 
-					}
+		aux=0;
+		for (j = 0; j < rows; j++){
+	 		 aux += m1[i*cols+j] * m2[j*cols+k];
+		   	 m3[i*cols+k] = aux; 
 				}
+			}
 		}
 }
 
