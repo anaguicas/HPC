@@ -11,3 +11,7 @@ En este taller se escribió un codigo para la multiplicación de matrices de man
 
 
 ####**Algoritmo secuencial Vs Algoritmo paralelo (Tiling)**
+
+![alt tag](Ts Vs Tp Tiling.png)
+
+####**Conclusiones**
