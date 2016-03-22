@@ -68,6 +68,8 @@ Se realizó una comparación entre el algortimo secuencial y el algoritmo parale
 
 La implementación del algoritmo paralelo se hizo con Cuda.
 
+El archivo con el algoritmo es : **multi_matrices_ingenuo.c**
+
 **Tabla tiempos de ejecución**: Contiene el promedio de los tiempos de ejecución de Ts, Tp y de X por cada tamaño.
 
 Las tablas completas con los datos correspondientes para cada tamaño se encuentran en el archivo **Tablas - Ts Vs Tp ingenuo.md**
@@ -94,6 +96,8 @@ Tamaño | Ts | Tp | X = Ts/Tp
 
 Se comparó la ejecución entre el algoritmo secuencial y el algoritmo paralelo con memoria compartida mediante la toma de datos de los tiempos de ejecución con diferentes tamaños para cada algoritmo, se saco una gráfica de aceleración con los datos obtenidos.
 
+El archivo con el algoritmo es : **multi_matrices_tiling.c**
+
 **Tabla tiempos de ejecución**: Contiene el promedio de los tiempos de ejecución de Ts, Tp y de X por cada tamaño.
 
 Las tablas completas con los datos correspondientes para cada tamaño se encuentran en el archivo **Tablas - Ts Vs Tp Tiling.md**
@@ -113,7 +117,11 @@ Tamaño | Ts | Tp | X = Ts/Tp
 320|0.1408583333 |	0.0004144|339.9091055
 
 ####Gráfica
-
 ![alt tag](Ts Vs Tp Tiling.png)
 
 ##**Conclusiones**
+
+1. Se observó que el algoritmo secuencial es menos óptimo que los algoritmos paralelos.
+2. El algoritmo paralelo que usa memoria compartida es mas óptimo que el algoritmo ingenuo ya que divide su trabajo y acaba en un menor tiempo.
+3. La aceleración en la implementación con memoria compartida es incremental, siempre sube.
+4. La aceleración en la implementación ingenua llega a un punto en que parece que trata nivelarse, no es incremental como la aceleración en la ejecución ingenua.
