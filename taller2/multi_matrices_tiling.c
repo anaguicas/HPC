@@ -79,18 +79,6 @@ void llenar(int *m){
 	}
 }
 
-void comprobarResultado(int *m3_a, int *m3){
-	for(int i=0; i<cols; i++){
-		for (int j = 0; i < cols; j++){
-			if(m3_a[(i*cols)+j] != m3[(i*cols)+j]){
-				printf("Los resultados no son iguales \n");
-			}			
-		}
-	}
-
-	printf("Los resultados son iguales \n");
-}
-
 void imprimir(int *m){
 	int i,j;
 	for (i = 0; i < rows; i++){		
@@ -109,6 +97,8 @@ int main(){
 	
 	clock_t start_t, end_t, start_t_GPU, end_t_GPU;
 	double total_t, total_t_GPU;	
+	
+	 cudaError_t error = cudaSuccess;
 
 	/*-------------Algoritmo secuencial-----------------------------*/
 	m1= (int *)malloc(tama);		
@@ -131,18 +121,44 @@ int main(){
 
 
   	/*-------------Algoritmo paralelo-----------------------------*/
-	cudaMalloc((void **)&m1_a,(tama));
-	cudaMalloc((void **)&m2_a,(tama));
-	cudaMalloc((void **)&m3_a,(tama));
-
-	cudaMemcpy(m1_a,m1,tama,cudaMemcpyHostToDevice);
-	cudaMemcpy(m2_a,m2,tama,cudaMemcpyHostToDevice);
+  	
+  	//Asignación de memoria
+	error=cudaMalloc((void **)&m1_a,(tama));
+	if(error != cudaSuccess){
+        	printf("Ocurrio un error reservando memoria para la matriz 2");
+        	exit(0);
+    	}
+    	
+	error=cudaMalloc((void **)&m2_a,(tama));
+	if(error != cudaSuccess){
+        	printf("Ocurrio un error reservando memoria para la matriz 2");
+        	exit(0);
+    	}
+    	
+	error=cudaMalloc((void **)&m3_a,(tama));
+	if(error != cudaSuccess){
+        	printf("Ocurrio un error reservando memoria para la matriz 2");
+        	exit(0);
+    	}
+    	
+	start_t_GPU=clock();
+	
+	//Copia de datos del host al device
+	error=cudaMemcpy(m1_a,m1,tama,cudaMemcpyHostToDevice);
+	if(error != cudaSuccess){
+        	printf("Error copiando datos de la matriz m1 a la matriz m1_a");
+        	exit(0);
+    	}
+    	
+	error=cudaMemcpy(m2_a,m2,tama,cudaMemcpyHostToDevice);
+	if(error != cudaSuccess){
+        	printf("Error copiando datos de la matriz m2 a la matriz m2_a");
+        	exit(0);
+    	}
 
 	int blockSize=32;
 	dim3 dimBlock(blockSize,blockSize,1);
   	dim3 dimGrid(ceil(cols/float(blockSize)),ceil(cols/float(blockSize)),1);
-
-  	start_t_GPU=clock();
 
 	//multi_matricesDevice<<<dimGrid,dimBlock>>>(m1_a,m2_a,m3_a);
 	multi_matricesTiled<<<dimGrid,dimBlock>>>(m1_a,m2_a,m3_a);
@@ -150,8 +166,6 @@ int main(){
 
 	end_t_GPU=clock();
 	/*---------------------------------------------------------------*/
-
-	//comprobarResultado(m3_a,m3);
 
 	/*imprimir(m3);
 	printf("\n");*/
