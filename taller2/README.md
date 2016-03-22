@@ -124,4 +124,4 @@ Tamaño | Ts | Tp | X = Ts/Tp
 1. Se observó que el algoritmo secuencial es menos óptimo que los algoritmos paralelos.
 2. El algoritmo paralelo que usa memoria compartida es mas óptimo que el algoritmo ingenuo ya que divide su trabajo y acaba en un menor tiempo.
 3. La aceleración en la implementación con memoria compartida es incremental, siempre sube.
-4. La aceleración en la implementación ingenua llega a un punto en que parece que trata nivelarse, no es incremental como la aceleración en la ejecución ingenua.
+4. La aceleración en la implementación ingenua llega a un punto en que parece que trata nivelarse.
