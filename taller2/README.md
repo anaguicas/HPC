@@ -1,4 +1,3 @@
-
 ####HPC
 #Taller 2 - Parcial 1
 ##Multiplicación de Matrices
@@ -46,6 +45,21 @@ Tamaño | Ts
 ![alt tag](Algoritmo paralelo.png)
 
 ####**Algoritmo Paralelo Memoria compartida**
+
+Tamaño | Ts
+-------|----
+32|	0.000042
+64|	0.00004546666667
+96|	0.00005426666667
+128|	0.00007693333333
+160|	0.0001048666667
+192|	0.000124
+224|	0.0001904666667
+256|	0.0002482666667
+288|	0.0003111333333
+320|	0.0004144
+
+![alt tag](Algoritmo paralelo - memoria compartida.png)
 
 ####**Algoritmo secuencial Vs Algoritmo paralelo (ingenuo)**
 
