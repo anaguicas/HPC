@@ -119,6 +119,11 @@ Tamaño | Ts | Tp | X = Ts/Tp
 ####Gráfica
 ![alt tag](Ts Vs Tp Tiling.png)
 
+##**Gráfica comparativa**
+Los puntos rojos representan la aceleración del algoritmo con memoria compartida y las X azules representan la aceleración del algoritmo ingenuo.
+
+![alt tag](Ingenua Vs Tiling.png)
+
 ##**Conclusiones**
 
 1. Se observó que el algoritmo secuencial es menos óptimo que los algoritmos paralelos.
